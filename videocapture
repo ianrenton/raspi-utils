@@ -1,0 +1,20 @@
+#! /bin/sh
+# /etc/init.d/videocapture
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting videocapture script"
+    su pi -c '/home/pi/video/capture.sh &> /dev/null &'
+    ;;
+  stop)
+    echo "Stopping videocapture script"
+    killall raspivid
+    ;;
+  *)
+    echo "Usage: /etc/init.d/videocapture {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
