@@ -2,6 +2,7 @@
 
 DIR="/home/pi/video/"
 2>/dev/null
+cd $DIR
 
 # Delete old files to free up disk space
 DISKFULL=$(df -h $DIR | grep -v File | awk '{print $5 }' | cut -d "%" -f1 -)
