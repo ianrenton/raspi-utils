@@ -12,8 +12,10 @@ until [ $DISKFULL -le "90" ]; do
 done
 
 # Start recording new file
+# Each time netcat connects and disconnects, the raspivid line will terminate,
+# so run this in a loop
 while true; do
   lastfile=$(ls [0-9][0-9][0-9][0-9] | tail -1)
-  newfile=$((++lastfile))
+  newfile=$((10#$lastfile+1))
   raspivid -o $DIR$(printf "%04u" $newfile) -t 0 -vf -hf -w 640 -h 360
 done
